@@ -14,6 +14,7 @@ import "../assets/custom/css/home.css";
 import Slide from "@mui/material/Slide";
 import Backdrop from "@mui/material/Backdrop";
 import { Mode, Auth } from "../App";
+import logo from '../assets/img/CBlogo.png'
 
 // inner components
 import Dashboard from "./Dashboard";
@@ -167,7 +168,7 @@ const Home = () => {
                       color="primary"
                       variant="h5"
                     >
-                      WoodSala
+                      Class Bazaar
                     </Typography>
                   }
                   {...a11yProps(0)}
@@ -576,11 +577,15 @@ const Home = () => {
             </IconButton>
           )}
 
-          <Typography variant="h5">WoodSala</Typography>
+            
+          <Typography variant="h5" className = 'heading'>
+            Class Bazaar</Typography>
         </Grid>
 
         <Grid item xs={4}>
-          {/* Nothing to fill  */}
+         <div className = 'logoContainer'>
+         <img src = {logo} alt = 'CBlogo' />
+         </div>
         </Grid>
 
         <Grid item sx={{ display: "flex", justifyContent: "end" }} xs={4}>
