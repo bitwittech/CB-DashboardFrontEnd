@@ -57,10 +57,29 @@
     display: none !important;
 }
 
+.heading {
+    align-items: center;
+    display: flex;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+}
+
+.logoContainer img {
+    width: 22%;
+}
+
 @media (max-width: 800px) {
     .tabPanel {
         left: 30%;
         width: 70%;
+    }
+    .logoContainer img {
+        width: 25%;
     }
 }
 
@@ -84,5 +103,8 @@
         width: inherit;
         /* background-color : rgba(224, 223, 223, 0.233); */
         z-index: -1;
+    }
+    .logoContainer img {
+        width: 20%;
     }
 }

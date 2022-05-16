@@ -30,7 +30,7 @@ function App() {
   const light = createTheme({
     palette: {
       primary: {
-        main: "#91441f",
+        main: "#ff5300",
       },
       secondary : {
         main: '#ef3c3c'
