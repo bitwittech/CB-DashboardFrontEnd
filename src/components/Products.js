@@ -1,28 +1,19 @@
 import React, { useState, useContext,useEffect } from "react";
 import {
-  Box,
-  FormControl,
-  MenuItem,
+ 
   Typography,
   TextField,
-  InputLabel,
-  Select,
   Grid,
-  Button,
   IconButton
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
-import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
 import { OpenBox, Notify } from "../App";
 import {getListProduct, deleteProduct} from '../services/service'
 
 export default function Products() {
-  
-  
-  const [age, setAge] = useState("");
-  const [price, setPrice] = useState("");
+
 
   // useContext 
 
@@ -117,314 +108,53 @@ export default function Products() {
 
 
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
-    { field: "SKU", headerName: "SKU", width: 100 },
+    { field: "id", headerName: "ID", width: 50 },
+    { field: "name", headerName: "Name", width: 150 },
+    
     {
-      field: "featured_image",
-      headerName: "Featured Image",
-      width: 160,
-      align : 'center',
-      renderCell: (params) => <div className="categoryImage" ><img src={params.formattedValue} alt='featured' /></div>,
-
-    },
-    {
-      field: "product_title",
-      headerName: "Product Title",
+      field: "email_address",
+      headerName: "Email",
       width: 150,
        
     },
     {
-      field: "category_name",
-      headerName: "Category Name",
+      field: "password",
+      headerName: "Password",
       width: 150,
        
     },
     {
-      field: "sub_category_name",
-      headerName: "Sub Category Name",
-      type: "number",
+      field: "mobile_no",
+      headerName: "Phone",
       width: 110,
     },
     {
-      field: "product_description",
-      headerName: "Product Description",
+      field: "gender",
+      headerName: "Gender",
       width: 160,
     },
     {
-      field: "seo_title",
-      headerName: "SEO Title",
+      field: "school_or_college_name",
+      headerName: "School Or College",
       width: 160,
     },
     {
-      field: "seo_description",
-      headerName: "SEO Description",
+      field: "class_year",
+      headerName: "Class Or Year",
       width: 160,
     },
     {
-      field: "seo_keyword",
-      headerName: "SEO Keyword",
+      field: "city",
+      headerName: "City",
       width: 160,
     },
     
     {
-      field: "primary_material",
-      headerName: "Primary Material",
-      width: 160,
-    },
-    {
-      field: "secondary_material",
-      headerName: "Secondary material",
-      width: 160,
-    },
-    {
-      field: "secondary_material_weight",
-      headerName: "Secondary material Weight",
-      width: 160,
-    },
-    {
-      field: "length",
-      headerName: "Length",
-      width: 160,
-    },
-    {
-      field: "breadth",
-      headerName: "Breadth",
-      width: 160,
-    },
-    {
-      field: "height",
-      headerName: "Height",
-      width: 160,
-    },
-    {
-      field: "weight",
-      headerName: "Weight",
-      width: 160,
-    },
-    {
-      field: "polish",
-      headerName: "Polish",
-      width: 160,
-    },
-    {
-      field: "hinge",
-      headerName: "Hinge",
-      width: 160,
-    },
-    {
-      field: "knob",
-      headerName: "Knob",
-      width: 160,
-    },
-    {
-      field: "door",
-      headerName: "Door",
-      width: 160,
-    },
-    {
-      field: "fitting",
-      headerName: "Fitting",
-      width: 160,
-    },
-    {
-      field: "selling_points",
-      headerName: "Selling Points",
-      width: 160,
-    },
-    {
-      field: "top_size",
-      headerName: "Top Size",
-      width: 160,
-    },
-    {
-      field: "dial_size",
-      headerName: "Dial Size",
-      width: 160,
-    },
-    {
-      field: "seating_size_width",
-      headerName: "Seating Size Width",
-      width: 160,
-    },
-    {
-      field: "seating_size_depth",
-      headerName: "Seating Size Depth",
-      width: 160,
-    },
-    {
-      field: "seating_size_height",
-      headerName: "seating_size_height",
-      width: 160,
-    },
-    {
-      field: "weight_capacity",
-      headerName: "Weight Capacity",
-      width: 160,
-    },
-    {
-      field: "wall_hanging",
-      headerName: "Wall Hanging",
-      width: 160,
-    },
-    {
-      field: "assembly_required",
-      headerName: "Assembly Required",
-      width: 160,
-    },
-    {
-      field: "assembly_part",
-      headerName: "Assembly Part",
-      width: 160,
-    },
-    {
-      field: "legs",
-      headerName: "Legs",
-      width: 160,
-    },
-    {
-      field: "mirror",
-      headerName: "Mirror",
-      width: 160,
-    },
-    {
-      field: "mirror_width",
-      headerName: "Mirror Width",
-      width: 160,
-    },
-    {
-      field: "mirror_length",
-      headerName: "Mirror Height",
-      width: 160,
-    },
-    {
-      field: "silver",
-      headerName: "Silver",
-      width: 160,
-    },
-    {
-      field: "silver_weight",
-      headerName: "Silver weight",
+      field: "reg_time",
+      headerName: "Registration Time",
       width: 160,
     },
     
-    {
-      field: "joints",
-      headerName: "Joints",
-      width: 160,
-    },
-    
-    {
-      field: "wheel",
-      headerName: "Wheel",
-      width: 160,
-    },
-    
-    {
-      field: "trolley",
-      headerName: "Trolley",
-      width: 160,
-    },
-    
-    {
-      field: "trolley_material",
-      headerName: "Trolley Material",
-      width: 160,
-    },
-    
-    {
-      field: "rotating_seats",
-      headerName: "Rotating Seats",
-      width: 160,
-    },
-    
-    {
-      field: "eatable_oil_polish",
-      headerName: "Eatable Oil Polish",
-      width: 160,
-    },
-    
-    {
-      field: "no_chemical",
-      headerName: "No Chemical",
-      width: 160,
-    },
-    
-    {
-      field: "rotating_seats",
-      headerName: "Rotating Seats",
-      width: 160,
-    },
-    
-    {
-      field: "straight_back",
-      headerName: "Straight Back",
-      width: 160,
-    },
-    {
-      field: "lean_back",
-      headerName: "Lean Back",
-      width: 160,
-    },
-    
-    {
-      field: "weaving",
-      headerName: "Weaving",
-      width: 160,
-    },
-    
-    {
-      field: "not_suitable_for_Micro_Dish",
-      headerName: "Suitable For Micro or Dish",
-      width: 160,
-    },
-    
-    {
-      field: "tilt_top",
-      headerName: "Tilt Top",
-      width: 160,
-    },
-    
-    {
-      field: "inside_compartments",
-      headerName: "Inside Compartments",
-      width: 160,
-    },
-    
-    {
-      field: "stackable",
-      headerName: "Stackable",
-      width: 160,
-    },
-    
-    {
-      field: "MRP",
-      headerName: "MRP",
-      width: 160,
-    },
-    
-    {
-      field: "tax_rate",
-      headerName: "Tax Rate",
-      width: 160,
-    },
-    
-    {
-      field: "selling_price",
-      headerName: "Selling Price",
-      width: 160,
-    },
-    
-    {
-      field: "discount_limit",
-      headerName: "Discount Limit",
-      width: 160,
-    },
-    
-    {
-      field: "dispatch_time",
-      headerName: "Dispatch Time",
-      width: 160,
-    },
     {
       field: "action",
       headerName: "Actions",
@@ -477,13 +207,7 @@ export default function Products() {
     );
   }
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const handleChangePrice = (event) => {
-    setPrice(event.target.value);
-  };
+ 
 
   const handleSearch = (e)=>{
     // console.log(e.target.value)
@@ -493,7 +217,7 @@ export default function Products() {
   return (
     <>
       <Typography sx={{ display: "block" }} variant="h5">
-        Products
+        User Panel
       </Typography>
 
       <br></br>
@@ -516,13 +240,13 @@ export default function Products() {
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            label="Search by SKU"
+            label="User Eamil"
             onChange = {handleSearch}
             name = 'seachQuery'
             type="search"
           />
         </Grid>
-
+{/* 
         <Grid xs={12} md={2.8}>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -570,7 +294,7 @@ export default function Products() {
           >
             Add Product
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       {/* Section 1 ends  */}

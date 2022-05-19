@@ -64,6 +64,8 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 import DoorSlidingIcon from '@mui/icons-material/DoorSliding';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 const Home = () => {
   const [ShowTabs, setShowTabs] = useState(false);
 
@@ -175,17 +177,17 @@ const Home = () => {
                 />
                 <Tab
                   wrapped
-                  icon={<ShoppingBagOutlinedIcon />}
-                  label="Product"
+                  icon={<AccountCircleIcon />}
+                  label="User Panel"
                   {...a11yProps(1)}
                 />
                 <Tab
                   wrapped
-                  icon={<FormatListBulletedOutlinedIcon />}
-                  label="Category"
+                  icon={<GpsFixedIcon />}
+                  label="User Tracking"
                   {...a11yProps(2)}
                 />
-                <Tab
+                {/* <Tab
                   wrapped
                   icon={<ViewCarouselIcon />}
                   label="Sub Category"
@@ -274,12 +276,12 @@ const Home = () => {
                   icon={<PersonOutlineOutlinedIcon />}
                   label="Our Staff"
                   {...a11yProps(17)}
-                />
+                /> */}
                 <Tab
                   wrapped
                   icon={<SettingsOutlinedIcon />}
                   label="Settings"
-                  {...a11yProps(18)}
+                  {...a11yProps(3)}
                 />
                 <Button
                   color="primary"
@@ -296,8 +298,7 @@ const Home = () => {
         <Tabs
           orientation="vertical"
           value={value}
-          variant="scrollable"
-
+          // variant="scrollable"
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -320,23 +321,23 @@ const Home = () => {
           />
           <Tab
             wrapped
-            icon={<ShoppingBagOutlinedIcon />}
-            label="Product"
+            icon={<AccountCircleIcon />}
+            label="User Panel"
             {...a11yProps(1)}
           />
          <Tab
                   wrapped
-                  icon={<FormatListBulletedOutlinedIcon />}
-                  label="Category"
+                  icon={<GpsFixedIcon />}
+                  label="User Tracking"
                   {...a11yProps(2)}
                 />
                 <Tab
                   wrapped
-                  icon={<MenuOpenIcon />}
-                  label="Sub Category"
+                  icon={<SettingsOutlinedIcon />}
+                  label="Setting"
                   {...a11yProps(3)}
                 />
-                <Tab
+                {/* <Tab
                   wrapped
                   icon={<ForestIcon />}
                   label="Primary Material"
@@ -425,7 +426,7 @@ const Home = () => {
                   icon={<SettingsOutlinedIcon />}
                   label="Settings"
                   {...a11yProps(18)}
-                />
+                /> */}
         </Tabs>
 
         <TabPanel value={value} index={0}>
