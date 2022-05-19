@@ -4,7 +4,7 @@ import {
   Typography,
   TextField,
   Grid,
-  IconButton
+  IconButton,InputAdornment
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
@@ -37,63 +37,15 @@ export default function Products() {
 
         return ({
           id: row._id,
-          SKU: row.SKU,
-          product_title: row.product_title,
-          category_name: row.category_name,
-          sub_category_name: row.sub_category_name,
-          product_description: row.product_description,
-          seo_title: row.seo_title,
-          seo_description: row.seo_description,
-          seo_keyword: row.seo_keyword,
-          featured_image: row.featured_image,
-          primary_material: row.primary_material_name,
-          secondary_material: row.secondary_material_name ,
-          secondary_material_weight: row.secondary_material_weight,
-          length: row.length_main,
-          breadth: row.breadth,
-          height: row.height,
-          weight: row.weight,
-          polish: row.polish_name,
-          hinge: row.hinge_name,
-          knob: row.knob_name,
-          handle: row.handle_name,
-          door: row.door_name,
-          fitting: row.fitting_name,
-          selling_points: row.selling_points,
-          top_size: row.top_size,
-          dial_size: row.dial_size,
-          seating_size_width: row.seating_size_width,
-          seating_size_depth: row.seating_size_depth,
-          seating_size_height: row.seating_size_height,
-          weight_capacity: row.weight_capacity,
-          wall_hanging: row.wall_hanging,
-          assembly_required: row.assembly_required,
-          assembly_part: row.assembly_part,
-          leg : row.legs,
-          mirror: row.mirror,
-          mirror_width: row.mirror_width,
-          mirror_length: row.mirror_length,
-          silver: row.silver,
-          silver_weight: row.silver_weight,
-          joints: row.joints,
-          wheel: row.wheel,
-          trolley: row.trolley,
-          trolley_material: row.trolley_material,
-          rotating_seats: row.rotating_seats,
-          eatable_oil_polish: row.eatable_oil_polish,
-          no_chemical: row.no_chemical,
-          straight_back : row.straight_back,
-          lean_back: row.lean_back,
-          weaving: row.weaving,
-          not_suitable_for_Micro_Dish: row.not_suitable_for_Micro_Dish,
-          tilt_top: row.tilt_top,
-          inside_compartments: row.inside_compartments,
-          stackable: row.stackable,
-          MRP: row.MRP,
-          tax_rate: row.tax_rate,
-          selling_price: row.selling_price,
-          discount_limit: row.discount_limit,
-          dispatch_time: row.dispatch_time,
+          name: row.name ,
+          gender: row.gender ,
+          email_address: row.email_address ,
+          school_or_college_name: row.school_or_college_name ,
+          class_year: row.class_year ,
+          city: row.city ,
+          mobile_no: row.mobile_no ,
+          password: row.password ,
+          reg_time: row.reg_time ,
           action: row
         })
       }))
@@ -114,7 +66,7 @@ export default function Products() {
     {
       field: "email_address",
       headerName: "Email",
-      width: 150,
+      width: 200,
        
     },
     {
@@ -167,7 +119,7 @@ export default function Products() {
           console.log(params)
               SideBox.setOpen({
                 state : true,
-                formType : 'update_product',
+                formType : 'update_user',
                 payload : params
               }) 
             }} aria-label="update"  >
@@ -200,7 +152,7 @@ export default function Products() {
           pageSize={5}
           rowsPerPageOptions={[5]}
           filterModel={{
-            items: [{ columnField: 'SKU', operatorValue: 'contains', value: `${search}` }],
+            items: [{ columnField: 'email_address', operatorValue: 'contains', value: `${search}` }],
           }}
         />
       </div>
@@ -235,7 +187,7 @@ export default function Products() {
           gap: "15px",
         }}
       >
-        <Grid xs={12} md={2.8}>
+        <Grid xs={12} >
           <TextField
             fullWidth
             autoComplete={false}
@@ -243,6 +195,9 @@ export default function Products() {
             label="User Eamil"
             onChange = {handleSearch}
             name = 'seachQuery'
+            InputProps={{
+              startAdornment: <InputAdornment position="start">Email</InputAdornment>,
+            }}
             type="search"
           />
         </Grid>
