@@ -551,7 +551,7 @@ const Home = () => {
         className={viewMode.mode === true ? "darkNav" : "topNav"}
         sx={{ boxShadow: 1 }}
       >
-        <Grid item xs={4} sx={{ display: "flex" }}>
+        <Grid item xs={4} className = 'heading'>
           {ShowTabs === false ? (
             <IconButton
               className="hamIcon"
