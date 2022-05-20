@@ -48,3 +48,41 @@ export const updateUser = async (data) => {
    }})
 }
 
+// ==================== service of the Track ========================
+
+// for listing the listCardTrack
+
+export const listCardTrack = async()=>{
+   return await axios.get(`${localBaseUrl}/listCardTrack`,{headers: { 
+         'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+      }})
+ 
+ }
+
+// for listing the listEnrollTrack
+
+export const listEnrollTrack = async()=>{
+   return await axios.get(`${localBaseUrl}/listEnrollTrack`,{headers: { 
+         'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+      }})
+ 
+ }
+
+// for listing the listSearchTrack
+
+export const listSearchTrack = async()=>{
+   return await axios.get(`${localBaseUrl}/listSearchTrack`,{headers: { 
+         'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+      }})
+ 
+ }
+
+// for listing the listTrackData
+
+export const listTrackData = async()=>{
+   return await axios.get(`${localBaseUrl}/listTrackData`,{headers: { 
+         'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+      }})
+ 
+ }
+

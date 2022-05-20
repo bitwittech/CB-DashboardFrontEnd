@@ -19,6 +19,7 @@ import logo from '../assets/img/CBlogo.png'
 // inner components
 import Dashboard from "./Dashboard";
 import UserPanel from "./UserPanel";
+import UserTracking from "./UserTracking";
 
 // icons
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -26,27 +27,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import GridViewIcon from "@mui/icons-material/GridView";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
-import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import ForestIcon from '@mui/icons-material/Forest';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import InsertLinkIcon from '@mui/icons-material/InsertLink';
-import ConstructionIcon from '@mui/icons-material/Construction';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import DoorSlidingIcon from '@mui/icons-material/DoorSliding';
-import DragHandleIcon from '@mui/icons-material/DragHandle';
-import CollectionsIcon from '@mui/icons-material/Collections';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 const Home = () => {
@@ -240,6 +224,9 @@ const Home = () => {
 
         <TabPanel value={value} index={1}>
           <UserPanel />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <UserTracking />
         </TabPanel>
         
       </Box>
