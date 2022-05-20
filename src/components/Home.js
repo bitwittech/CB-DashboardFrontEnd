@@ -18,24 +18,7 @@ import logo from '../assets/img/CBlogo.png'
 
 // inner components
 import Dashboard from "./Dashboard";
-import Products from "./Products";
-import Category from "./Category";
-import Customers from "./Customers";
-import Orders from "./Orders";
-import Coupons from "./Coupons";
-import OurStaff from "./OurStaff";
-import Setting from "./Setting";
-import Banner from "./Banner";
-import SubCategory from "./SubCategory";
-import PrimaryMaterial from "./PrimaryMaterial";
-import SecondaryMaterial from "./SecondaryMaterial";
-import Polish from "./Polish";
-import Hinge from "./Hinge";
-import Fitting  from "./Fitting";
-import Knob  from "./Knob";
-import Door  from "./Door";
-import Handle  from "./Handle";
-import Gallery  from "./Gallery";
+import UserPanel from "./UserPanel";
 
 // icons
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -187,96 +170,7 @@ const Home = () => {
                   label="User Tracking"
                   {...a11yProps(2)}
                 />
-                {/* <Tab
-                  wrapped
-                  icon={<ViewCarouselIcon />}
-                  label="Sub Category"
-                  {...a11yProps(3)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ForestIcon />}
-                  label="Primary Material"
-                  {...a11yProps(4)}
-                />
-                <Tab
-                  wrapped
-                  icon={<FilterListIcon />}
-                  label="Secondary Mattirial"
-                  {...a11yProps(5)}
-                />
-                <Tab
-                  wrapped
-                  icon={<AutoAwesomeIcon />}
-                  label="Polish"
-                  {...a11yProps(6)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ConstructionIcon />}
-                  label="Fitting"
-                  {...a11yProps(7)}
-                />
-                <Tab
-                  wrapped
-                  icon={<InsertLinkIcon />}
-                  label="Hinge"
-                  {...a11yProps(8)}
-                />
-                <Tab
-                  wrapped
-                  icon={<AdjustIcon />}
-                  label="Knob"
-                  {...a11yProps(9)}
-                />
-                  <Tab
-                  wrapped
-                  icon={<DoorSlidingIcon />}
-                  label="Door"
-                  {...a11yProps(10)}
-                />
-                  <Tab
-                  wrapped
-                  icon={<DragHandleIcon />}
-                  label="Handle Material"
-                  {...a11yProps(11)}
-                />
-                <Tab
-                  wrapped
-                  icon={<CollectionsIcon />}
-                  label="Gallery"
-                  {...a11yProps(12)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ViewCarouselIcon />}
-                  label="Banner"
-                  {...a11yProps(13)}
-                />
-                <Tab
-                  wrapped
-                  icon={<PeopleAltOutlinedIcon />}
-                  label="Customer"
-                  {...a11yProps(14)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ExploreOutlinedIcon />}
-                  label="Order"
-                  {...a11yProps(15)}
-                />
-                <Tab
-                  wrapped
-                  icon={<CardGiftcardOutlinedIcon />}
-                  label="Coupons"
-                  {...a11yProps(16)}
-                />
-                <Tab
-                  wrapped
-                  icon={<PersonOutlineOutlinedIcon />}
-                  label="Our Staff"
-                  {...a11yProps(17)}
-                /> */}
+               
                 <Tab
                   wrapped
                   icon={<SettingsOutlinedIcon />}
@@ -337,96 +231,7 @@ const Home = () => {
                   label="Setting"
                   {...a11yProps(3)}
                 />
-                {/* <Tab
-                  wrapped
-                  icon={<ForestIcon />}
-                  label="Primary Material"
-                  {...a11yProps(4)}
-                />
-                <Tab
-                  wrapped
-                  icon={<FilterListIcon />}
-                  label="Secondary Material"
-                  {...a11yProps(5)}
-                />
-                <Tab
-                  wrapped
-                  icon={<AutoAwesomeIcon />}
-                  label="Polish"
-                  {...a11yProps(6)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ConstructionIcon />}
-                  label="Fitting"
-                  {...a11yProps(7)}
-                />
-                <Tab
-                  wrapped
-                  icon={<InsertLinkIcon />}
-                  label="Hinge"
-                  {...a11yProps(8)}
-                />
-                <Tab
-                  wrapped
-                  icon={<AdjustIcon />}
-                  label="Knob"
-                  {...a11yProps(9)}
-                />
-                <Tab
-                  wrapped
-                  icon={<DoorSlidingIcon />}
-                  label="Door"
-                  {...a11yProps(10)}
-                />
-                <Tab
-                  wrapped
-                  icon={<DragHandleIcon />}
-                  label="Handle Material"
-                  {...a11yProps(11)}
-                />
-                <Tab
-                  wrapped
-                  icon={<CollectionsIcon />}
-                  label="Gallery"
-                  {...a11yProps(12)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ViewCarouselIcon />}
-                  label="Banner"
-                  {...a11yProps(13)}
-                />
-                <Tab
-                  wrapped
-                  icon={<PeopleAltOutlinedIcon />}
-                  label="Customer"
-                  {...a11yProps(14)}
-                />
-                <Tab
-                  wrapped
-                  icon={<ExploreOutlinedIcon />}
-                  label="Order"
-                  {...a11yProps(15)}
-                />
-                <Tab
-                  wrapped
-                  icon={<CardGiftcardOutlinedIcon />}
-                  label="Coupons"
-                  {...a11yProps(16)}
-                />
-                <Tab
-                  wrapped
-                  icon={<PersonOutlineOutlinedIcon />}
-                  label="Our Staff"
-                  {...a11yProps(17)}
-                />
-                <Tab
-                  wrapped
-                  icon={<SettingsOutlinedIcon />}
-                  label="Settings"
-                  {...a11yProps(18)}
-                /> */}
+                
         </Tabs>
 
         <TabPanel value={value} index={0}>
@@ -434,75 +239,7 @@ const Home = () => {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-          <Products />
-        </TabPanel>
-
-        <TabPanel value={value} index={2}>
-          <Category />
-        </TabPanel>
-        
-        <TabPanel value={value} index={3}>
-          <SubCategory />
-        </TabPanel>
-        
-        <TabPanel value={value} index={4}>
-          <PrimaryMaterial />
-        </TabPanel>
-        
-        <TabPanel value={value} index={5}>
-          <SecondaryMaterial />
-        </TabPanel>
-        
-        <TabPanel value={value} index={6}>
-          <Polish />
-        </TabPanel>
-        
-        <TabPanel value={value} index={7}>
-          <Fitting />
-        </TabPanel>
-        
-        <TabPanel value={value} index={8}>
-        <Hinge />
-        </TabPanel>
-        
-        <TabPanel value={value} index={9}>
-          <Knob />
-        </TabPanel>
-        
-        <TabPanel value={value} index={10}>
-          <Door />
-        </TabPanel>
-        
-        <TabPanel value={value} index={11}>
-          <Handle />
-        </TabPanel>
-        
-        <TabPanel value={value} index={12}>
-          <Gallery />
-        </TabPanel>
-        
-        <TabPanel value={value} index={13}>
-          <Banner />
-        </TabPanel>
-        
-        <TabPanel value={value} index={14}>
-          <Customers />
-        </TabPanel>
-
-        <TabPanel value={value} index={15}>
-          <Orders />
-        </TabPanel>
-
-        <TabPanel value={value} index={16}>
-          <Coupons />
-        </TabPanel>
-
-        <TabPanel value={value} index={17}>
-          <OurStaff />
-        </TabPanel>
-
-        <TabPanel value={value} index={18}>
-          <Setting />
+          <UserPanel />
         </TabPanel>
         
       </Box>

@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { DataGrid } from "@mui/x-data-grid";
 import { OpenBox, Notify } from "../App";
-import {getListProduct, deleteProduct} from '../services/service'
+import {getListUser, deleteUser} from '../services/service'
 
 export default function Products() {
 
@@ -29,7 +29,7 @@ export default function Products() {
 
 
   useEffect(()=>{
-    getListProduct()
+    getListUser()
     .then((data) => {
       console.log(data.data)
 
@@ -126,7 +126,7 @@ export default function Products() {
               <CreateIcon />
         </IconButton>
         
-        <IconButton onClick={() => { deleteProduct(params.formattedValue._id).then((res)=>{
+        <IconButton onClick={() => { deleteUser(params.formattedValue._id).then((res)=>{
               despatchAlert.setNote({
                 open : true,
                 variant : 'success',
