@@ -86,3 +86,30 @@ export const listTrackData = async()=>{
  
  }
 
+//  =========================== CURD For Bannner ========================
+
+// add banner
+
+export const addBanner = async (data)=>{
+   return await axios.post(`${localBaseUrl}/addBanner`,data,{headers: { 
+      'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+   }})
+}
+
+// list banner
+
+export const listBanner = async ()=>{
+   return await axios.get(`${localBaseUrl}/listBanner`,{headers: { 
+      'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+   }})
+}
+
+// change status banner
+
+export const chaneStatus = async (data)=>{
+   return await axios.patch(`${localBaseUrl}/chaneStatusBanner`,data,{headers: { 
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+   }})
+}
+

@@ -20,8 +20,10 @@ import logo from '../assets/img/CBlogo.png'
 import Dashboard from "./Dashboard";
 import UserPanel from "./UserPanel";
 import UserTracking from "./UserTracking";
+import Banner from "./Banner";
 
 // icons
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -155,11 +157,17 @@ const Home = () => {
                   {...a11yProps(2)}
                 />
                
+               <Tab
+                 wrapped
+                 icon={<ViewCarouselIcon />}
+                 label="Banner"
+                 {...a11yProps(3)}
+               />
                 <Tab
                   wrapped
                   icon={<SettingsOutlinedIcon />}
                   label="Settings"
-                  {...a11yProps(3)}
+                  {...a11yProps(4)}
                 />
                 <Button
                   color="primary"
@@ -211,9 +219,15 @@ const Home = () => {
                 />
                 <Tab
                   wrapped
+                  icon={<ViewCarouselIcon />}
+                  label="Banner"
+                  {...a11yProps(3)}
+                />
+                <Tab
+                  wrapped
                   icon={<SettingsOutlinedIcon />}
                   label="Setting"
-                  {...a11yProps(3)}
+                  {...a11yProps(4)}
                 />
                 
         </Tabs>
@@ -227,6 +241,10 @@ const Home = () => {
         </TabPanel>
         <TabPanel value={value} index={2}>
           <UserTracking />
+        </TabPanel>
+        
+        <TabPanel value={value} index={3}>
+          <Banner />
         </TabPanel>
         
       </Box>
