@@ -8,7 +8,7 @@ import {
   Grid,
   Box,
 } from "@mui/material";
-import loginPoster from "../assets/img/login.jpeg";
+import loginPoster from "../assets/img/login.png";
 import signupPoster from "../assets/img/signup.jpeg";
 import "../assets/custom/css/enteryPoint.css";
 import { GoogleLogin } from "react-google-login";
@@ -116,7 +116,7 @@ export default function EntryPoints() {
       {/* // login module */}
       {window.location.pathname === "/" && (
         <Container fixed sx={{ height: "content-fit" }}>
-          <Box p={15} pt={3} pb={3}>
+          <Box p={15} pt={5} pb={3}>
             <Grid
               container
               sx={{ borderRadius: 2, boxShadow: 3, overflow: "hidden" }}
@@ -124,7 +124,7 @@ export default function EntryPoints() {
               {/* Image Side  */}
               <Grid item id="imgBox" sm={12} md={6} lg={6}>
                 <img
-                  style={{ width: "100%", height: "100%" }}
+                  style={{ width: "100%", height: "100%", verticalAlign : 'center' }}
                   src={loginPoster}
                   alt="Login Poster"
                 />

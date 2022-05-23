@@ -1,79 +1,78 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
- 
   Typography,
   TextField,
+  LinearProgress,
   Grid,
-  IconButton,InputAdornment
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import CreateIcon from '@mui/icons-material/Create';
-import { DataGrid } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIcon from "@mui/icons-material/Create";
+import {
+  DataGrid,
+  gridPageCountSelector,
+  gridPageSelector,
+  useGridApiContext,
+  useGridSelector,
+} from "@mui/x-data-grid";
+import Pagination from "@mui/material/Pagination";
+
 import { OpenBox, Notify } from "../App";
-import {getListUser, deleteUser} from '../services/service'
+import { getListUser, deleteUser } from "../services/service";
 
 export default function Products() {
-
-
-  // useContext 
+  // useContext
 
   const SideBox = useContext(OpenBox);
   const despatchAlert = useContext(Notify);
 
-
   // states
 
-  const [search,setSearch] = useState('')
-  const [Row, setRows] = useState()
+  const [search, setSearch] = useState("");
+  const [Row, setRows] = useState(null);
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     getListUser()
-    .then((data) => {
-      console.log(data.data)
+      .then((data) => {
+        console.log(data.data);
 
-      setRows(data.data.map((row) => {
-
-        return ({
-          id: row._id,
-          name: row.name ,
-          gender: row.gender ,
-          email_address: row.email_address ,
-          school_or_college_name: row.school_or_college_name ,
-          class_year: row.class_year ,
-          city: row.city ,
-          mobile_no: row.mobile_no ,
-          password: row.password ,
-          reg_time: row.reg_time ,
-          action: row
-        })
-      }))
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-
-
-  },[])
-
-
+        setRows(
+          data.data.map((row) => {
+            return {
+              id: row._id,
+              name: row.name,
+              gender: row.gender,
+              email_address: row.email_address,
+              school_or_college_name: row.school_or_college_name,
+              class_year: row.class_year,
+              city: row.city,
+              mobile_no: row.mobile_no,
+              password: row.password,
+              reg_time: row.reg_time,
+              action: row,
+            };
+          })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
     { field: "name", headerName: "Name", width: 150 },
-    
+
     {
       field: "email_address",
       headerName: "Email",
       width: 200,
-       
     },
     {
       field: "password",
       headerName: "Password",
       width: 150,
-       
     },
     {
       field: "mobile_no",
@@ -100,71 +99,97 @@ export default function Products() {
       headerName: "City",
       width: 160,
     },
-    
+
     {
       field: "reg_time",
       headerName: "Registration Time",
       width: 160,
     },
-    
+
     {
       field: "action",
       headerName: "Actions",
       width: 200,
-      renderCell: (params) => 
-      <div>
-        
-        <IconButton onClick={() => {
-          
-          console.log(params)
+      renderCell: (params) => (
+        <div>
+          <IconButton
+            onClick={() => {
+              console.log(params);
               SideBox.setOpen({
-                state : true,
-                formType : 'update_user',
-                payload : params
-              }) 
-            }} aria-label="update"  >
-              <CreateIcon />
-        </IconButton>
-        
-        <IconButton onClick={() => { deleteUser(params.formattedValue._id).then((res)=>{
-              despatchAlert.setNote({
-                open : true,
-                variant : 'success',
-                message : "Product deleted successfully !!!"
-              })
-            }) }} aria-label="delete"  >
-              <DeleteIcon />
-        </IconButton>
-        
-      </div>,
-    }
-    
+                state: true,
+                formType: "update_user",
+                payload: params,
+              });
+            }}
+            aria-label="update"
+          >
+            <CreateIcon />
+          </IconButton>
+
+          <IconButton
+            onClick={() => {
+              deleteUser(params.formattedValue._id).then((res) => {
+                despatchAlert.setNote({
+                  open: true,
+                  variant: "success",
+                  message: "Product deleted successfully !!!",
+                });
+              });
+            }}
+            aria-label="delete"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ),
+    },
   ];
 
- 
-
   function DataGridView() {
+    function CustomPagination() {
+      const apiRef = useGridApiContext();
+      const page = useGridSelector(apiRef, gridPageSelector);
+      const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+
+      return (
+        <Pagination
+          color="primary"
+          count={pageCount}
+          page={page + 1}
+          onChange={(event, value) => apiRef.current.setPage(value - 1)}
+        />
+      );
+    }
     return (
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={Row}
           columns={columns}
+          components={{
+            Pagination: CustomPagination,
+            LoadingOverlay: LinearProgress,
+          }}
           pageSize={5}
           rowsPerPageOptions={[5]}
+          loading = {Row !== null ? false : true}
           filterModel={{
-            items: [{ columnField: 'email_address', operatorValue: 'contains', value: `${search}` }],
+            items: [
+              {
+                columnField: "email_address",
+                operatorValue: "contains",
+                value: `${search}`,
+              },
+            ],
           }}
         />
       </div>
     );
   }
 
- 
-
-  const handleSearch = (e)=>{
+  const handleSearch = (e) => {
     // console.log(e.target.value)
-     setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -187,21 +212,23 @@ export default function Products() {
           gap: "15px",
         }}
       >
-        <Grid xs={12} >
+        <Grid xs={12}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
             label="User Eamil"
-            onChange = {handleSearch}
-            name = 'seachQuery'
+            onChange={handleSearch}
+            name="seachQuery"
             InputProps={{
-              startAdornment: <InputAdornment position="start">Email</InputAdornment>,
+              startAdornment: (
+                <InputAdornment position="start">Email</InputAdornment>
+              ),
             }}
             type="search"
           />
         </Grid>
-{/* 
+        {/* 
         <Grid xs={12} md={2.8}>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>

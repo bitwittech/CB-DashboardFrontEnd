@@ -13,13 +13,13 @@ import {
 } from "recharts";
 import { Typography, Grid, IconButton } from "@mui/material";
 import "../assets/custom/css/dashboard.css";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import TodayIcon from '@mui/icons-material/Today';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PersonIcon from '@mui/icons-material/Person';
+import CreditCardOffOutlinedIcon from '@mui/icons-material/CreditCardOffOutlined';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { DataGrid } from "@mui/x-data-grid";
 import {siteReport } from "../services/service";
 
@@ -276,14 +276,14 @@ const Dashboard = () => {
           className="overviewBoardSec2"
         >
           <div class="sec2Icon item1">
-            <ShoppingCartOutlinedIcon />
+            <PersonIcon />
           </div>
           <div>
             <Typography align="center" variant="caption">
               Total User
             </Typography>
             <Typography align="center" variant="h5">
-              100
+              {state.totalUser}
             </Typography>
           </div>
         </Grid>
@@ -296,14 +296,15 @@ const Dashboard = () => {
           className="overviewBoardSec2"
         >
           <div class="sec2Icon item2">
-            <AutorenewOutlinedIcon />
+            <MenuBookIcon />
           </div>
           <div>
             <Typography align="center" variant="caption">
-              Order Pending
+              Total Courses
             </Typography>
             <Typography align="center" variant="h5">
-              37
+              {state.totalCourse}
+              
             </Typography>
           </div>
         </Grid>
@@ -316,14 +317,15 @@ const Dashboard = () => {
           className="overviewBoardSec2"
         >
           <div class="sec2Icon item3">
-            <LocalShippingOutlinedIcon />
+            <CreditCardOffOutlinedIcon />
           </div>
           <div>
             <Typography align="center" variant="caption">
-              Order Processing
+              Free Courses
             </Typography>
             <Typography align="center" variant="h5">
-              400
+            {state.freeCourse}
+
             </Typography>
           </div>
         </Grid>
@@ -336,14 +338,14 @@ const Dashboard = () => {
           className="overviewBoardSec2"
         >
           <div class="sec2Icon item4">
-            <DoneOutlinedIcon />
+            <CurrencyRupeeIcon />
           </div>
           <div>
             <Typography align="center" variant="caption">
-              Order Delivered
+              Paid Courses
             </Typography>
             <Typography align="center" variant="h5">
-              200
+              {state.paidCourse}
             </Typography>
           </div>
         </Grid>

@@ -494,7 +494,7 @@ export default function UserTracking() {
           xs={12}
           md={2.8}
           sx={{ boxShadow: 1 }}
-          className="overviewBoardSec2"
+          className="overviewBoardSec2 hover"
         >
           <div class="sec2Icon item1">
             <RouteIcon />
@@ -512,7 +512,7 @@ export default function UserTracking() {
           xs={12}
           md={2.8}
           sx={{ boxShadow: 1 }}
-          className="overviewBoardSec2"
+          className="overviewBoardSec2 hover"
         >
           <div class="sec2Icon item2">
             <CreditCardIcon />
@@ -530,7 +530,7 @@ export default function UserTracking() {
           xs={12}
           md={2.8}
           sx={{ boxShadow: 1 }}
-          className="overviewBoardSec2"
+          className="overviewBoardSec2 hover"
         >
           <div class="sec2Icon item3">
             <SubscriptionsIcon />
@@ -548,7 +548,7 @@ export default function UserTracking() {
           xs={12}
           md={2.8}
           sx={{ boxShadow: 1 }}
-          className="overviewBoardSec2"
+          className="overviewBoardSec2 hover"
         >
           <div class="sec2Icon item4">
             <SearchIcon />
