@@ -86,7 +86,7 @@ export const listTrackData = async()=>{
  
  }
 
-//  =========================== CURD For Bannner ========================
+//  =========================== CURD For Banner ========================
 
 // add banner
 
@@ -113,3 +113,12 @@ export const chaneStatus = async (data)=>{
    }})
 }
 
+
+//  =========================== CURD For Site Report    ========================
+
+export const siteReport = async ()=>{
+   return await axios.get(`${localBaseUrl}/siteReport`,{headers: { 
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+   }})
+}

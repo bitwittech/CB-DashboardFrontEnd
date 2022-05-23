@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -11,15 +11,37 @@ import {
   PieChart,
   Pie,
 } from "recharts";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, IconButton } from "@mui/material";
 import "../assets/custom/css/dashboard.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import TodayIcon from '@mui/icons-material/Today';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { DataGrid } from "@mui/x-data-grid";
+import {siteReport } from "../services/service";
 
 const Dashboard = () => {
+  
+
+  useEffect(()=>{
+
+    siteReport()
+    .then((data)=>{
+
+      setState(data.data)
+
+      console.log(data)
+
+    })
+
+  },[])
+  
+
+  const [state,setState] = useState({})
+  
   const data = [
     {
       name: "Page A",
@@ -187,24 +209,17 @@ const Dashboard = () => {
           sx={{ boxShadow: 2, backgroundColor: "#0694a2" }}
           className="overviewBoard"
         >
-          <svg
-            stroke="currentColor"
-            fill="white"
-            stroke-width="0"
-            version="1.1"
-            viewBox="0 0 16 16"
-            width="2em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M16 5l-8-4-8 4 8 4 8-4zM8 2.328l5.345 2.672-5.345 2.672-5.345-2.672 5.345-2.672zM14.398 7.199l1.602 0.801-8 4-8-4 1.602-0.801 6.398 3.199zM14.398 10.199l1.602 0.801-8 4-8-4 1.602-0.801 6.398 3.199z"></path>
-          </svg>
+          
+          <IconButton size="large"  aria-label="delete">
+          <TodayIcon  style={{ color: "white" }}/>
+          </IconButton>
 
           <Typography color="white" variant="h6">
             Today Login
           </Typography>
 
           <Typography color="white" variant="h3">
-            $100
+          {state.todayLog}
           </Typography>
         </Grid>
 
@@ -215,26 +230,16 @@ const Dashboard = () => {
           sx={{ boxShadow: 2, backgroundColor: "#3f83f8" }}
           className="overviewBoard"
         >
-          <svg
-            stroke="white"
-            fill="none"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            width="2em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
+          <IconButton size="large" aria-label="delete">
+          <CalendarMonthIcon  style={{ color: "white" }}/>
+          </IconButton>
+
           <Typography color="white" variant="h6">
             Month Login
           </Typography>
 
           <Typography color="white" variant="h3">
-            $100
+          {state.monthLog}
           </Typography>
         </Grid>
 
@@ -245,23 +250,16 @@ const Dashboard = () => {
           sx={{ boxShadow: 2, backgroundColor: "#0e9f6e" }}
           className="overviewBoard"
         >
-          <svg
-            stroke="white"
-            fill="white"
-            stroke-width="0"
-            version="1.1"
-            viewBox="0 0 16 16"
-            width="2em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M14.5 2h-13c-0.825 0-1.5 0.675-1.5 1.5v9c0 0.825 0.675 1.5 1.5 1.5h13c0.825 0 1.5-0.675 1.5-1.5v-9c0-0.825-0.675-1.5-1.5-1.5zM1.5 3h13c0.271 0 0.5 0.229 0.5 0.5v1.5h-14v-1.5c0-0.271 0.229-0.5 0.5-0.5zM14.5 13h-13c-0.271 0-0.5-0.229-0.5-0.5v-4.5h14v4.5c0 0.271-0.229 0.5-0.5 0.5zM2 10h1v2h-1zM4 10h1v2h-1zM6 10h1v2h-1z"></path>
-          </svg>
+         <IconButton  size="large" aria-label="delete">
+          <EventAvailableIcon  style={{ color: "white" }}/>
+          </IconButton>
+
           <Typography color="white" variant="h6">
             Year Login
           </Typography>
 
           <Typography color="white" variant="h3">
-            $100
+          {state.yearLog}
           </Typography>
         </Grid>
       </Grid>
@@ -282,7 +280,7 @@ const Dashboard = () => {
           </div>
           <div>
             <Typography align="center" variant="caption">
-              Total Order
+              Total User
             </Typography>
             <Typography align="center" variant="h5">
               100
