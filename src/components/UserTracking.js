@@ -61,22 +61,24 @@ export default function UserTracking() {
     p: 4,
   };
 
-  const [search, setSearch] = useState("");
-  const [gridTitle, setgridTitle] = useState("Click Over The Track Cards");
 
   const SideBox = useContext(OpenBox);
-  const despatchAlert = useContext(Notify);
 
-  const [open, setOpen] = React.useState(false);
+// states
+  const [open, setOpen] = useState(false);
+  const [Data, setData] = useState([]);
+  const [columns, setCol] = useState([]);
+  const [Row, setRows] = useState();
+  const [search, setSearch] = useState({email : '', date : ''});
+  const [gridTitle, setgridTitle] = useState("Click Over The Track Cards");
+
   const handleOpen = () => {
     return setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  const [Data, setData] = useState([]);
-  const [columns, setCol] = useState([]);
-  const [Row, setRows] = useState();
-
+ 
+  
   var colors = [
     "#FF6633",
     "#FFB399",
@@ -146,6 +148,7 @@ export default function UserTracking() {
 
   const col_row_change = (e) => {
     console.log(e);
+    localStorage.setItem('path',e);
 
     setgridTitle("Loading...");
 
@@ -176,16 +179,18 @@ export default function UserTracking() {
 
         listTrackData()
           .then((data) => {
-            console.log(data);
-
+            // console.log(data);
+              let date = ''
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
 
+                let date = JSON.stringify(row.time_stamp).split("T")[0].slice(1)
+
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  time_stamp: row.time_stamp,
+                  time_stamp: date,
                   page_time_span: row.page_time_span,
                 };
               })
@@ -386,8 +391,13 @@ export default function UserTracking() {
   };
 
   const handelSearch = (e) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
+    console.log(search);
+    setSearch({
+      ...search,
+      [e.target.name] : e.target.value
+    });
+
+    
   };
 
   function DataGridView() {
@@ -419,11 +429,11 @@ export default function UserTracking() {
           loading={gridTitle === "Loading..." ? true : false}
           filterModel={{
             items: [
-              {
+              {id : 1,
                 columnField: "user_email",
                 operatorValue: "contains",
-                value: `${search}`,
-              },
+                value: `${search.email}`,
+              }
             ],
           }}
           rows={Row}
@@ -455,13 +465,24 @@ export default function UserTracking() {
           gap: "15px",
         }}
       >
-        <Grid xs={12} md={8}>
+        <Grid xs={12} md={4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
             label="Search By Email"
             type="text"
+            name = 'email'
+            onChange={handelSearch}
+          />
+        </Grid>
+        <Grid xs={12} md={4}>
+          <TextField
+            fullWidth
+            autoComplete={false}
+            id="demo-helper-text-aligned-no-helper"
+            type="date"
+            name = 'date'
             onChange={handelSearch}
           />
         </Grid>
