@@ -20,6 +20,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import CreditCardOffOutlinedIcon from '@mui/icons-material/CreditCardOffOutlined';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import ErrorIcon from '@mui/icons-material/Error';
+import TrafficIcon from '@mui/icons-material/Traffic';
+import RouteIcon from '@mui/icons-material/Route';
+import EditRoadIcon from '@mui/icons-material/EditRoad';
+
 import { DataGrid } from "@mui/x-data-grid";
 import {siteReport } from "../services/service";
 
@@ -268,6 +273,82 @@ const Dashboard = () => {
       <br></br>
 
       <Grid container className="overviewContainer" spacing={1}>
+        <Grid
+          item
+          xs={12}
+          md={2.8}
+          sx={{ boxShadow: 1 }}
+          className="overviewBoardSec2"
+        >
+          <div class="sec2Icon item5">
+            <ErrorIcon />
+          </div>
+          <div>
+            <Typography align="center" variant="caption">
+              Anonymous User
+            </Typography>
+            <Typography align="center" variant="h5">
+              {state.anonymous}
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={2.8}
+          sx={{ boxShadow: 1 }}
+          className="overviewBoardSec2"
+        >
+          <div class="sec2Icon item6">
+            <TrafficIcon />
+          </div>
+          <div>
+            <Typography align="center" variant="caption">
+              Today Traffic 
+            </Typography>
+            <Typography align="center" variant="h5">
+              {state.todayTraffic}
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={2.8}
+          sx={{ boxShadow: 1 }}
+          className="overviewBoardSec2"
+        >
+          <div class="sec2Icon item7">
+            <RouteIcon />
+          </div>
+          <div>
+            <Typography align="center" variant="caption">
+              Month Traffic
+            </Typography>
+            <Typography align="center" variant="h5">
+              {state.monthTraffic}
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={2.8}
+          sx={{ boxShadow: 1 }}
+          className="overviewBoardSec2"
+        >
+          <div class="sec2Icon item8">
+            <EditRoadIcon />
+          </div>
+          <div>
+            <Typography align="center" variant="caption">
+              Year Traffic
+            </Typography>
+            <Typography align="center" variant="h5">
+              {state.yearTraffic}
+            </Typography>
+          </div>
+        </Grid>
         <Grid
           item
           xs={12}

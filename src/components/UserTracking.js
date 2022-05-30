@@ -13,6 +13,7 @@ import {
   Button,
   Modal,
   Fade,
+  InputAdornment
 } from "@mui/material";
 import {
   ResponsiveContainer,
@@ -21,6 +22,11 @@ import {
   Tooltip,
   PieChart,
   Pie,
+  LineChart,
+CartesianGrid,
+XAxis,
+YAxis,
+Line
 } from "recharts";
 import {
   DataGrid,
@@ -29,7 +35,7 @@ import {
   useGridApiContext,
   useGridSelector,
 } from "@mui/x-data-grid";
-import { OpenBox, Notify } from "../App";
+
 import Pagination from "@mui/material/Pagination";
 
 import {
@@ -61,24 +67,25 @@ export default function UserTracking() {
     p: 4,
   };
 
-
-  const SideBox = useContext(OpenBox);
-
-// states
-  const [open, setOpen] = useState(false);
-  const [Data, setData] = useState([]);
-  const [columns, setCol] = useState([]);
-  const [Row, setRows] = useState();
-  const [search, setSearch] = useState({email : '', date : ''});
+  const [search, setSearch] = useState({email : '',date : ''});
   const [gridTitle, setgridTitle] = useState("Click Over The Track Cards");
 
+  // useEffect(()=>{
+  //   col_row_change('path')
+  // })
+
+
+
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     return setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
- 
-  
+  const [Data, setData] = useState([]);
+  const [columns, setCol] = useState([]);
+  const [Row, setRows] = useState();
+
   var colors = [
     "#FF6633",
     "#FFB399",
@@ -146,11 +153,13 @@ export default function UserTracking() {
     handleOpen();
   };
 
-  const col_row_change = (e) => {
-    console.log(e);
-    localStorage.setItem('path',e);
+  let date = '';
 
+  const col_row_change = (e) => {
+    console.log(search);
     setgridTitle("Loading...");
+
+     localStorage.setItem('model',e);
 
     switch (e) {
       case "path":
@@ -166,7 +175,7 @@ export default function UserTracking() {
             width: 200,
           },
           {
-            field: "time_stamp",
+            field: "event_time",
             headerName: "Event Time",
             width: 200,
           },
@@ -177,20 +186,21 @@ export default function UserTracking() {
           },
         ]);
 
-        listTrackData()
+        listTrackData(search)
           .then((data) => {
-            // console.log(data);
-              let date = ''
+            console.log(data);
+
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
-
-                let date = JSON.stringify(row.time_stamp).split("T")[0].slice(1)
+                 date = JSON.stringify(row.time_stamp)
+          .split("T")[0]
+          .slice(1)
 
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  time_stamp: date,
+                  event_time: date,
                   page_time_span: row.page_time_span,
                 };
               })
@@ -226,17 +236,19 @@ export default function UserTracking() {
           },
         ]);
 
-        listSearchTrack()
+        listSearchTrack(search)
           .then((data) => {
             console.log(data);
             setRows(
               data.data.map((row) => {
                 setgridTitle("Search Track");
-
+                date = JSON.stringify(row.event_time)
+                .split("T")[0]
+                .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: row.time_stamp,
+                  event_time: date,
                   search_query: row.search_query,
                 };
               })
@@ -282,17 +294,19 @@ export default function UserTracking() {
           },
         ]);
 
-        listCardTrack()
+        listCardTrack(search)
           .then((data) => {
             console.log(data);
             setRows(
               data.data.map((row) => {
                 setgridTitle("Card Track");
-
+                date = JSON.stringify(row.event_time)
+                .split("T")[0]
+                .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: row.event_time,
+                  event_time: date,
                   card_title: row.card_title,
                   card_uuid: row.card_uuid,
                   provider: row.provider,
@@ -340,17 +354,19 @@ export default function UserTracking() {
           },
         ]);
 
-        listEnrollTrack()
+        listEnrollTrack(search)
           .then((data) => {
             console.log(data);
             setRows(
               data.data.map((row) => {
                 setgridTitle("Enroll Track");
-
+                date = JSON.stringify(row.event_time)
+                .split("T")[0]
+                .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: row.event_time,
+                  event_time: date ,
                   card_title: row.card_title,
                   card_uuid: row.card_uuid,
                   provider: row.provider,
@@ -391,13 +407,10 @@ export default function UserTracking() {
   };
 
   const handelSearch = (e) => {
-    console.log(search);
     setSearch({
       ...search,
       [e.target.name] : e.target.value
     });
-
-    
   };
 
   function DataGridView() {
@@ -429,11 +442,11 @@ export default function UserTracking() {
           loading={gridTitle === "Loading..." ? true : false}
           filterModel={{
             items: [
-              {id : 1,
-                columnField: "user_email",
+              {
+                columnField: "event_time",
                 operatorValue: "contains",
-                value: `${search.email}`,
-              }
+                value: `${search.date}`,
+              },
             ],
           }}
           rows={Row}
@@ -474,6 +487,11 @@ export default function UserTracking() {
             type="text"
             name = 'email'
             onChange={handelSearch}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">Email</InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid xs={12} md={4}>
@@ -481,17 +499,22 @@ export default function UserTracking() {
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            type="date"
             name = 'date'
+            type="date"
+            label="Search By Date"
+
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">Date</InputAdornment>
+              ),
+            }}
             onChange={handelSearch}
           />
         </Grid>
 
-        <Grid xs={12} md={3}>
+        <Grid xs={12} md={3.5}>
           <Button
-            onClick={() => {
-              SideBox.setOpen({ state: true, formType: "category" });
-            }}
+            onClick={() => col_row_change(localStorage.getItem('model') || 'path')}
             sx={{ width: "100%" }}
             color="primary"
             startIcon={<PersonSearchIcon />}
@@ -607,6 +630,7 @@ export default function UserTracking() {
           timeout: 500,
         }}
       >
+                                    
         <Fade in={open}>
           <Box sx={style}>
             {/* char view  */}
@@ -616,7 +640,17 @@ export default function UserTracking() {
                 <Typography variant="h6"> User Path </Typography>
                 <br></br>
                 <ResponsiveContainer width="95%" height="85%">
-                  <PieChart className="chart">
+                  
+                <LineChart width={730} height={250} data={Data}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name"  />
+                  <YAxis  dataKey = 'value' />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                </LineChart>
+                  {/* <PieChart className="chart">
                     <Tooltip />
                     <Legend />
                     <Pie
@@ -632,7 +666,7 @@ export default function UserTracking() {
                         <Cell key={`cell-${index}`} fill={colors[index]} />
                       ))}
                     </Pie>
-                  </PieChart>
+                  </PieChart> */}
                 </ResponsiveContainer>
               </Grid>
             </Grid>

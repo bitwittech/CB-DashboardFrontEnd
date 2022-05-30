@@ -5,7 +5,7 @@ import {
   LinearProgress,
   Grid,
   IconButton,
-  InputAdornment,
+  InputAdornment,Button
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
@@ -17,6 +17,7 @@ import {
   useGridSelector,
 } from "@mui/x-data-grid";
 import Pagination from "@mui/material/Pagination";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 
 import { OpenBox, Notify } from "../App";
 import { getListUser, deleteUser } from "../services/service";
@@ -28,17 +29,16 @@ export default function Products() {
   const despatchAlert = useContext(Notify);
 
   // states
-
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState({email : '',date : ''});
   const [Row, setRows] = useState(null);
 
   useEffect(() => {
-    getListUser()
+    getListUser(search.email)
       .then((data) => {
-        console.log(data.data);
 
         setRows(
           data.data.map((row) => {
+          let date = JSON.stringify(row.reg_time).split("T")[0].slice(1)
             return {
               id: row._id,
               name: row.name,
@@ -49,7 +49,7 @@ export default function Products() {
               city: row.city,
               mobile_no: row.mobile_no,
               password: row.password,
-              reg_time: row.reg_time,
+              reg_time: date,
               action: row,
             };
           })
@@ -58,7 +58,9 @@ export default function Products() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [search]);
+
+ 
 
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
@@ -145,6 +147,16 @@ export default function Products() {
     },
   ];
 
+  const handleSearch = (e) => {
+    console.log(e.target.name)
+    if(e.target.name === 'email') localStorage.setItem('searchEmail',e.target.value);
+    setSearch({
+      ...search,
+      [e.target.name] : e.target.value
+    });
+  };
+
+
   function DataGridView() {
     function CustomPagination() {
       const apiRef = useGridApiContext();
@@ -175,9 +187,9 @@ export default function Products() {
           filterModel={{
             items: [
               {
-                columnField: "email_address",
+                columnField: "reg_time",
                 operatorValue: "contains",
-                value: `${search}`,
+                value: `${search.date}`,
               },
             ],
           }}
@@ -186,10 +198,7 @@ export default function Products() {
     );
   }
 
-  const handleSearch = (e) => {
-    // console.log(e.target.value)
-    setSearch(e.target.value);
-  };
+
 
   return (
     <>
@@ -212,71 +221,54 @@ export default function Products() {
           gap: "15px",
         }}
       >
-        <Grid xs={12}>
+        <Grid xs={12} md = {4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
             label="User Eamil"
             onChange={handleSearch}
-            name="seachQuery"
+            name="email"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">Email</InputAdornment>
               ),
             }}
             type="search"
+
           />
         </Grid>
-        {/* 
-        <Grid xs={12} md={2.8}>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Grid>
 
-        <Grid xs={12} md={2.8}>
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Price</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={price}
-                label="Price"
-                onChange={handleChangePrice}
-              >
-                <MenuItem value={20}>Low to High</MenuItem>
-                <MenuItem value={30}>High To Low</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Grid>
+        <Grid xs={12} md={4}>
+          <TextField
+            fullWidth
+            autoComplete={false}
+            id="demo-helper-text-aligned-no-helper"
+            name = 'date'
+            type="date"
+            label="Search By Date"
 
-        <Grid xs={12} md={2.8}>
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">Date</InputAdornment>
+              ),
+            }}
+            onChange={handleSearch}
+          />
+        </Grid>
+      
+
+        <Grid xs={12} md={3.5}>
           <Button
             sx={{ width: "100%" }}
             color="primary"
-            startIcon={<AddIcon />}
+            startIcon={<PersonSearchIcon />}
             variant="contained"
-            onClick = {()=>{SideBox.setOpen({state : true, formType : 'product'})}}
+            // onClick = {()=>{setSearch()}}
           >
-            Add Product
+            Search User
           </Button>
-        </Grid> */}
+        </Grid> 
       </Grid>
 
       {/* Section 1 ends  */}

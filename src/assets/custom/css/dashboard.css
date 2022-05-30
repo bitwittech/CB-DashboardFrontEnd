@@ -1,56 +1,76 @@
-.overviewBoard {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    flex-direction: column !important;
-    border-radius: 10px !important;
-    padding: 20px !important;
-    /* border: 2px solid black; */
-}
-
-.overviewContainer {
-    justify-content: center !important;
-    gap: 10px;
-}
-
-.overviewBoardSec2 {
-    display: flex !important;
-    /* justify-content: center !important; */
-    align-items: center !important;
-    border-radius: 10px !important;
-    padding: 10px 10px 10px 10px !important;
-    text-align: center;
-    transition: all 300ms;
-}
-
-.sec2Icon {
-    display: flex;
-    padding: 10px;
-    align-items: center;
-    border-radius: 100px;
-    margin-right: 5%;
-}
-
-.item1 {
-    background-color: rgb(247, 202, 202);
-    color: rgb(255, 105, 5);
-}
-
-.item2 {
-    background-color: rgb(202, 229, 247);
-    color: rgb(5, 84, 255);
-}
-
-.item3 {
-    background-color: rgb(126, 241, 206);
-    color: rgb(8, 109, 109);
-}
-
-.item4 {
-    background-color: rgb(160, 252, 232);
-    color: rgb(27, 139, 13);
-}
-
-.chart {
-    width: 500px;
-}
+    .overviewBoard {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
+        border-radius: 10px !important;
+        padding: 20px !important;
+        /* border: 2px solid black; */
+    }
+    
+    .overviewContainer {
+        justify-content: center !important;
+        gap: 10px;
+    }
+    
+    .overviewBoardSec2 {
+        display: flex !important;
+        /* justify-content: center !important; */
+        align-items: center !important;
+        border-radius: 10px !important;
+        padding: 10px 10px 10px 10px !important;
+        text-align: center;
+        transition: all 300ms;
+    }
+    
+    .sec2Icon {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        border-radius: 100px;
+        margin-right: 5%;
+    }
+    
+    .item1 {
+        background-color: rgb(247, 202, 202);
+        color: rgb(255, 105, 5);
+    }
+    
+    .item2 {
+        background-color: rgb(202, 229, 247);
+        color: rgb(5, 84, 255);
+    }
+    
+    .item3 {
+        background-color: rgb(126, 241, 206);
+        color: rgb(8, 109, 109);
+    }
+    
+    .item4 {
+        background-color: rgb(160, 252, 232);
+        color: rgb(27, 139, 13);
+    }
+    
+    .item5 {
+        background-color: rgb(199 199 199 / 60%);
+        color: rgb(52 56 51 / 91%);
+    }
+    
+    .item6 {
+        background-color: rgb(255 219 182);
+        color: rgb(255 21 21 / 74%);
+    }
+    
+    .item7 {
+        background-color: rgb(228 237 94 / 79%);
+        color: rgb(63 82 17 / 84%);
+    }
+    
+    .item8 {
+        background-color: rgb(166 252 160 / 92%);
+        color: rgb(17 112 5);
+    }
+    
+    .chart {
+        width: 500px;
+    }

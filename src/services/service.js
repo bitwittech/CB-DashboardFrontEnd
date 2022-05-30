@@ -25,8 +25,8 @@ export const addProduct = async(data)=>{
 
 // for listing the products
 
-export const getListUser = async()=>{
-   return await axios.get(`${localBaseUrl}/getListProduct`,{headers: { 
+export const getListUser = async(data)=>{
+   return await axios.get(`${localBaseUrl}/getListProduct/?email=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -52,8 +52,8 @@ export const updateUser = async (data) => {
 
 // for listing the listCardTrack
 
-export const listCardTrack = async()=>{
-   return await axios.get(`${localBaseUrl}/listCardTrack`,{headers: { 
+export const listCardTrack = async(data)=>{
+   return await axios.get(`${localBaseUrl}/listCardTrack?email=${data.email}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -61,8 +61,8 @@ export const listCardTrack = async()=>{
 
 // for listing the listEnrollTrack
 
-export const listEnrollTrack = async()=>{
-   return await axios.get(`${localBaseUrl}/listEnrollTrack`,{headers: { 
+export const listEnrollTrack = async(data)=>{
+   return await axios.get(`${localBaseUrl}/listEnrollTrack?email=${data.email}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -70,8 +70,8 @@ export const listEnrollTrack = async()=>{
 
 // for listing the listSearchTrack
 
-export const listSearchTrack = async()=>{
-   return await axios.get(`${localBaseUrl}/listSearchTrack`,{headers: { 
+export const listSearchTrack = async(data)=>{
+   return await axios.get(`${localBaseUrl}/listSearchTrack?email=${data.email}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -79,8 +79,17 @@ export const listSearchTrack = async()=>{
 
 // for listing the listTrackData
 
-export const listTrackData = async()=>{
-   return await axios.get(`${localBaseUrl}/listTrackData`,{headers: { 
+export const listTrackData = async(data)=>{
+   return await axios.get(`${localBaseUrl}/listTrackData?email=${data.email}`,{headers: { 
+         'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+      }})
+ 
+ }
+
+// for listing the searchUser
+
+export const searchUser = async(data)=>{
+   return await axios.get(`${localBaseUrl}/searchUser?email=${data.email}&table=${data.table}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
