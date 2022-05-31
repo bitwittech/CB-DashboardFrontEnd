@@ -193,14 +193,14 @@ export default function UserTracking() {
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
-                 date = JSON.stringify(row.time_stamp)
-          .split("T")[0]
-          .slice(1)
+          //        date = JSON.stringify(row.time_stamp)
+          // .split("T")[0]
+          // .slice(1)
 
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: date,
+                  event_time: row.time_stamp,
                   page_time_span: row.page_time_span,
                 };
               })
