@@ -354,9 +354,9 @@ const Home = () => {
             </IconButton>
           )}
 
-          <IconButton size="small" color="primary">
+          {/* <IconButton size="small" color="primary">
             <NotificationsIcon />
-          </IconButton>
+          </IconButton> */}
 
           {MenuBox()}
 

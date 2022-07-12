@@ -144,6 +144,8 @@ export default function UserTracking() {
 
     let DataArr = [];
 
+ console.log(JSON.stringify(data.row.page_time_span))
+
     JSON.parse(data.row.page_time_span).map((row) => {
       DataArr.push({ name: row.path, value: row.time });
     });
@@ -193,14 +195,15 @@ export default function UserTracking() {
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
-          //        date = JSON.stringify(row.time_stamp)
-          // .split("T")[0]
-          // .slice(1)
+                console.log(row.time_stamp)
+                 date = JSON.stringify(row.time_stamp)
+          .split("T")[0]
+          .slice(1)
 
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: row.time_stamp,
+                  event_time: date,
                   page_time_span: row.page_time_span,
                 };
               })

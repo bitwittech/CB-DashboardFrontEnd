@@ -199,7 +199,7 @@ const  Sideform = () =>{
         dispatchAlert.setNote({
           open: true,
           variant: 'error',
-          message: "Somthing Went Worang !!!"
+          message: "Something Went Wrong !!!"
 
         })
       })

@@ -439,7 +439,7 @@ const Dashboard = () => {
 
       {/* char view  */}
 
-      <Grid container scaping={2} className="overviewContainer">
+      {/* <Grid container scaping={2} className="overviewContainer">
         <Grid item xs={12} md={5.8} sx={{ boxShadow: 2, borderRadius: 5 }}>
           <Typography p={2} variant="h6">
             {" "}
@@ -497,18 +497,18 @@ const Dashboard = () => {
         </Grid>
       </Grid>
       <br></br>
-      <br></br>
+      <br></br> */}
 
       {/* char view ends */}
       {/* data grid  */}
 
-      <Grid container scaping={2} className="overviewContainer">
+      {/* <Grid container scaping={2} className="overviewContainer">
         <Grid item p={2} xs={12} sx={{ boxShadow: 2, borderRadius: 5 }}>
           <Typography variant="h6"> Recent Order </Typography>
           <br></br>
           {DataGridView()}
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* data grid ends  */}
     </>

@@ -339,7 +339,7 @@ export default function EntryPoints() {
                   sx={{ color: "#0e9f6e", display: "block", marginTop: "8%" }}
                 >
                   <Link className="links" to="/login">
-                    Alredy, Have an account. Login
+                    Already, Have an account. Login
                   </Link>
                 </Typography>
               </Grid>
