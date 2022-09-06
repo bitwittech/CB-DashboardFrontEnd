@@ -26,7 +26,7 @@ export const addProduct = async(data)=>{
 // for listing the products
 
 export const getListUser = async(data)=>{
-   return await axios.get(`${localBaseUrl}/getListProduct/?email=${data}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/getListProduct/?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  

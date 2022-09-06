@@ -5,7 +5,8 @@ import {
   LinearProgress,
   Grid,
   IconButton,
-  InputAdornment,Button
+  InputAdornment,Button,
+  Box
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
@@ -17,25 +18,32 @@ import {
   useGridSelector,
 } from "@mui/x-data-grid";
 import Pagination from "@mui/material/Pagination";
-import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+// import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import { OpenBox, Notify } from "../App";
 import { getListUser, deleteUser } from "../services/service";
 
-export default function Products() {
+import { DateRangePicker, } from "mui-daterange-picker";
+
+
+export default function UserPanel() {
   // useContext
 
   const SideBox = useContext(OpenBox);
   const despatchAlert = useContext(Notify);
 
   // states
-  const [search, setSearch] = useState({email : '',date : ''});
+  const [search, setSearch] = useState({email : '',mobile : '', startDate : '' , endDate : ''});
   const [Row, setRows] = useState(null);
+  const [openDateRange, setOpenDateRange] = useState(false);
+  // const [dateRange, setDateRange] = useState({});
+
 
   useEffect(() => {
-    getListUser(search.email)
+    getListUser(JSON.stringify(search))
       .then((data) => {
-
+        console.log(data)
         setRows(
           data.data.map((row) => {
           let date = JSON.stringify(row.reg_time).split("T")[0].slice(1)
@@ -58,7 +66,7 @@ export default function Products() {
       .catch((err) => {
         console.log(err);
       });
-  }, [search]);
+  }, [search.startDate,search.endDate,search.mobile]);
 
  
 
@@ -134,7 +142,7 @@ export default function Products() {
                 despatchAlert.setNote({
                   open: true,
                   variant: "success",
-                  message: "Product deleted successfully !!!",
+                  message: "User deleted successfully !!!",
                 });
               });
             }}
@@ -156,7 +164,7 @@ export default function Products() {
     });
   };
 
-
+// data grid for data view
   function DataGridView() {
     function CustomPagination() {
       const apiRef = useGridApiContext();
@@ -187,9 +195,9 @@ export default function Products() {
           filterModel={{
             items: [
               {
-                columnField: "reg_time",
+                columnField: "email_address",
                 operatorValue: "contains",
-                value: `${search.date}`,
+                value: `${search.email}`,
               },
             ],
           }}
@@ -198,6 +206,24 @@ export default function Products() {
     );
   }
 
+  // date picker from third party 
+  const DatePicker = props => {
+  
+    const toggle = () => setOpenDateRange(!openDateRange);
+  
+    return (
+      <Box sx = {{
+        position: 'absolute'
+      }}>
+      <DateRangePicker
+        open={openDateRange}
+        toggle={toggle}
+        // onChange={(range) => setDateRange(range)}
+        onChange={(range) => setSearch({...search,startDate : range.startDate,endDate : range.endDate})}
+      />
+      </Box>
+    );
+  }
 
 
   return (
@@ -221,13 +247,28 @@ export default function Products() {
           gap: "15px",
         }}
       >
+
+<Grid xs={12} md={3.5}>
+          <Button
+            sx={{ width: "100%" }}
+            color="primary"
+            startIcon={<CalendarMonthIcon />}
+            variant="contained"
+            onClick = {()=>{setOpenDateRange(true)}}
+          >
+            Date Filter
+          </Button>
+          <DatePicker/>
+        </Grid> 
+      
+
         <Grid xs={12} md = {4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            label="User Eamil"
-            onChange={handleSearch}
+            label="User Email"
+            onChange={(e)=> setSearch({...search, email : e.target.value })}
             name="email"
             InputProps={{
               startAdornment: (
@@ -244,31 +285,22 @@ export default function Products() {
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            name = 'date'
-            type="date"
-            label="Search By Date"
+            name = 'number'
+            type="number"
+            label="Search By Mobile"
+            onChange={(e)=> setSearch({...search, mobile : e.target.value})}
 
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Date</InputAdornment>
-              ),
-            }}
-            onChange={handleSearch}
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">Mobile Number</InputAdornment>
+            //   ),
+            // }}
           />
         </Grid>
-      
 
-        <Grid xs={12} md={3.5}>
-          <Button
-            sx={{ width: "100%" }}
-            color="primary"
-            startIcon={<PersonSearchIcon />}
-            variant="contained"
-            // onClick = {()=>{setSearch()}}
-          >
-            Search User
-          </Button>
-        </Grid> 
+
+
+        
       </Grid>
 
       {/* Section 1 ends  */}
@@ -277,7 +309,7 @@ export default function Products() {
 
       <Grid container scaping={2} className="overviewContainer">
         <Grid item p={2} xs={12} sx={{ boxShadow: 2, borderRadius: 5 }}>
-          <Typography variant="h6"> Product List </Typography>
+          <Typography variant="h6"> User List </Typography>
           <br></br>
           {DataGridView()}
         </Grid>

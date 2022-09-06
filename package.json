@@ -2,7 +2,6 @@
     "name": "adminpanel",
     "version": "0.1.0",
     "private": true,
-
     "dependencies": {
         "@emotion/react": "^11.8.2",
         "@emotion/styled": "^11.8.1",
@@ -15,6 +14,7 @@
         "@tinymce/tinymce-react": "^4.0.0",
         "axios": "^0.26.1",
         "dotenv": "^16.0.0",
+        "mui-daterange-picker": "^1.0.5",
         "react": "^17.0.2",
         "react-burger-menu": "^3.0.6",
         "react-chartjs-2": "^4.0.1",
