@@ -27,7 +27,7 @@ export default function EntryPoints() {
   const userauth = useContext(Auth)
 
   const handelButton = () => {
-    console.log("Button Clicked");
+    // console.log("Button Clicked");
   };
 
   const post = [
@@ -78,7 +78,7 @@ export default function EntryPoints() {
     let res = login(FD)
 
     res.then((data)=>{
-      console.log(data)
+      // console.log(data)
 
       if(data.status === 200)
       {

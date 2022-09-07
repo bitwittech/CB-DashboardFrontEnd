@@ -118,7 +118,7 @@ const  Sideform = () =>{
         setYear(SideBox.open.payload.value.class_year)
         break;
       default:
-        console.log('');
+        // console.log('');
 
     }
   }, [SideBox.open.formType, SideBox.open.state])
@@ -137,7 +137,7 @@ const  Sideform = () =>{
         break;
 
       default:
-        console.log('');
+        // console.log('');
 
     }
 
@@ -172,7 +172,7 @@ const  Sideform = () =>{
     const res = updateUser(FD)
 
     res.then((data) => {
-      console.log(data.status)
+      // console.log(data.status)
 
       if (data.status === 203) {
         
@@ -195,7 +195,7 @@ const  Sideform = () =>{
 
     })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
         dispatchAlert.setNote({
           open: true,
           variant: 'error',

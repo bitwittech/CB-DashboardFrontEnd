@@ -34,7 +34,7 @@ export default function UserPanel() {
   const despatchAlert = useContext(Notify);
 
   // states
-  const [search, setSearch] = useState({email : '',mobile : '', startDate : '' , endDate : ''});
+  const [search, setSearch] = useState({email : '',mobile : '', startDate : '' , endDate : '', count : 0});
   const [Row, setRows] = useState(null);
   const [openDateRange, setOpenDateRange] = useState(false);
   // const [dateRange, setDateRange] = useState({});
@@ -43,7 +43,8 @@ export default function UserPanel() {
   useEffect(() => {
     getListUser(JSON.stringify(search))
       .then((data) => {
-        console.log(data)
+        // // console.log(data)
+        setSearch({...search, count : data.data.length});
         setRows(
           data.data.map((row) => {
           let date = JSON.stringify(row.reg_time).split("T")[0].slice(1)
@@ -64,7 +65,7 @@ export default function UserPanel() {
         );
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [search.startDate,search.endDate,search.mobile]);
 
@@ -124,7 +125,7 @@ export default function UserPanel() {
         <div>
           <IconButton
             onClick={() => {
-              console.log(params);
+              // console.log(params);
               SideBox.setOpen({
                 state: true,
                 formType: "update_user",
@@ -156,7 +157,7 @@ export default function UserPanel() {
   ];
 
   const handleSearch = (e) => {
-    console.log(e.target.name)
+    // console.log(e.target.name)
     if(e.target.name === 'email') localStorage.setItem('searchEmail',e.target.value);
     setSearch({
       ...search,
@@ -309,7 +310,17 @@ export default function UserPanel() {
 
       <Grid container scaping={2} className="overviewContainer">
         <Grid item p={2} xs={12} sx={{ boxShadow: 2, borderRadius: 5 }}>
+
+        <div style={
+            {
+              display: 'flex',
+              justifyContent: 'space-between',
+            }
+          } >
+
           <Typography variant="h6"> User List </Typography>
+          <Typography variant="h6"> {search.count} </Typography>
+          </div>
           <br></br>
           {DataGridView()}
         </Grid>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -53,6 +53,10 @@ import RouteIcon from "@mui/icons-material/Route";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import SearchIcon from "@mui/icons-material/Search";
+import { DateRangePicker, } from "mui-daterange-picker";
+
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
 
 export default function UserTracking() {
   const style = {
@@ -67,14 +71,8 @@ export default function UserTracking() {
     p: 4,
   };
 
-  const [search, setSearch] = useState({email : '',date : ''});
+  const [search, setSearch] = useState({title : 'path',email : '',date : '', endDate : '', startDate : '', count : 0});
   const [gridTitle, setgridTitle] = useState("Click Over The Track Cards");
-
-  // useEffect(()=>{
-  //   col_row_change('path')
-  // })
-
-
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -85,66 +83,35 @@ export default function UserTracking() {
   const [Data, setData] = useState([]);
   const [columns, setCol] = useState([]);
   const [Row, setRows] = useState();
+  const [openDateRange, setOpenDateRange] = useState(false);
 
-  var colors = [
-    "#FF6633",
-    "#FFB399",
-    "#FF33FF",
-    "#FFFF99",
-    "#00B3E6",
-    "#E6B333",
-    "#3366E6",
-    "#999966",
-    "#99FF99",
-    "#B34D4D",
-    "#80B300",
-    "#809900",
-    "#E6B3B3",
-    "#6680B3",
-    "#66991A",
-    "#FF99E6",
-    "#CCFF1A",
-    "#FF1A66",
-    "#E6331A",
-    "#33FFCC",
-    "#66994D",
-    "#B366CC",
-    "#4D8000",
-    "#B33300",
-    "#CC80CC",
-    "#66664D",
-    "#991AFF",
-    "#E666FF",
-    "#4DB3FF",
-    "#1AB399",
-    "#E666B3",
-    "#33991A",
-    "#CC9999",
-    "#B3B31A",
-    "#00E680",
-    "#4D8066",
-    "#809980",
-    "#E6FF80",
-    "#1AFF33",
-    "#999933",
-    "#FF3380",
-    "#CCCC00",
-    "#66E64D",
-    "#4D80CC",
-    "#9900B3",
-    "#E64D66",
-    "#4DB380",
-    "#FF4D4D",
-    "#99E6E6",
-    "#6666FF",
-  ];
+
+
+  // date picker from third party 
+  const DatePicker = props => {
+  
+    const toggle = () => setOpenDateRange(!openDateRange);
+  
+    return (
+      <Box sx = {{
+        position: 'absolute'
+      }}>
+      <DateRangePicker
+        open={openDateRange}
+        toggle={toggle}
+        // onChange={(range) => setDateRange(range)}
+        onChange={(range) => setSearch({...search,startDate : range.startDate,endDate : range.endDate})}
+      />
+      </Box>
+    );
+  }
 
   const handleOnCellClick = (data) => {
-    console.log(data);
+    // // console.log(data);
 
     let DataArr = [];
 
- console.log(JSON.stringify(data.row.page_time_span))
+//  // console.log(JSON.stringify(data.row.page_time_span))
 
     JSON.parse(data.row.page_time_span).map((row) => {
       DataArr.push({ name: row.path, value: row.time });
@@ -157,13 +124,20 @@ export default function UserTracking() {
 
   let date = '';
 
+  useEffect(()=>{
+
+    col_row_change(search)
+
+  },[search.title,search.emdDate,search.startDate])
+
+
   const col_row_change = (e) => {
-    console.log(search);
+    // // console.log(search);
     setgridTitle("Loading...");
 
      localStorage.setItem('model',e);
 
-    switch (e) {
+    switch (e.title) {
       case "path":
         setCol([
           {
@@ -188,14 +162,14 @@ export default function UserTracking() {
           },
         ]);
 
-        listTrackData(search)
+        listTrackData(JSON.stringify(search))
           .then((data) => {
-            console.log(data);
-
+            // // console.log(data);
+            setSearch({...search, count : data.data.length})
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
-                console.log(row.time_stamp)
+                // // console.log(row.time_stamp)
                  date = JSON.stringify(row.time_stamp)
           .split("T")[0]
           .slice(1)
@@ -210,7 +184,7 @@ export default function UserTracking() {
             );
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
 
         break;
@@ -239,9 +213,10 @@ export default function UserTracking() {
           },
         ]);
 
-        listSearchTrack(search)
+        listSearchTrack(JSON.stringify(search))
           .then((data) => {
-            console.log(data);
+            setSearch({...search, count : data.data.length});
+
             setRows(
               data.data.map((row) => {
                 setgridTitle("Search Track");
@@ -258,7 +233,7 @@ export default function UserTracking() {
             );
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
 
         break;
@@ -297,9 +272,11 @@ export default function UserTracking() {
           },
         ]);
 
-        listCardTrack(search)
+        listCardTrack(JSON.stringify(search))
           .then((data) => {
-            console.log(data);
+            // // console.log(data);
+        setSearch({...search, count : data.data.length});
+
             setRows(
               data.data.map((row) => {
                 setgridTitle("Card Track");
@@ -318,7 +295,7 @@ export default function UserTracking() {
             );
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
 
         break;
@@ -357,9 +334,11 @@ export default function UserTracking() {
           },
         ]);
 
-        listEnrollTrack(search)
+        listEnrollTrack(JSON.stringify(search))
           .then((data) => {
-            console.log(data);
+            // // console.log(data);
+        setSearch({...search, count : data.data.length});
+
             setRows(
               data.data.map((row) => {
                 setgridTitle("Enroll Track");
@@ -378,7 +357,7 @@ export default function UserTracking() {
             );
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           });
 
         break;
@@ -481,52 +460,62 @@ export default function UserTracking() {
           gap: "15px",
         }}
       >
-        <Grid xs={12} md={4}>
+
+<Grid xs={12} md={3.5}>
+          <Button
+            sx={{ width: "100%" }}
+            color="primary"
+            startIcon={<CalendarMonthIcon />}
+            variant="contained"
+            onClick = {()=>{setOpenDateRange(true)}}
+          >
+            Date Filter
+          </Button>
+          <DatePicker/>
+        </Grid> 
+      
+
+        <Grid xs={12} md = {4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            label="Search By Email"
-            type="text"
-            name = 'email'
-            onChange={handelSearch}
+            label="User Email"
+            onChange={(e)=> setSearch({...search, email : e.target.value })}
+            name="email"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">Email</InputAdornment>
               ),
             }}
+            type="search"
+
           />
         </Grid>
+
         <Grid xs={12} md={4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            name = 'date'
-            type="date"
-            label="Search By Date"
+            name = 'number'
+            type="number"
+            label="Search By Mobile"
+            onChange={(e)=> setSearch({...search, mobile : e.target.value})}
 
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Date</InputAdornment>
-              ),
-            }}
-            onChange={handelSearch}
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">Mobile Number</InputAdornment>
+            //   ),
+            // }}
           />
         </Grid>
 
-        <Grid xs={12} md={3.5}>
-          <Button
-            onClick={() => col_row_change(localStorage.getItem('model') || 'path')}
-            sx={{ width: "100%" }}
-            color="primary"
-            startIcon={<PersonSearchIcon />}
-            variant="contained"
-          >
-            Search User
-          </Button>
-        </Grid>
+
+
+        
       </Grid>
+
 
       {/* Section 1 ends  */}
 
@@ -536,7 +525,7 @@ export default function UserTracking() {
 
       <Grid container className="overviewContainer" spacing={1.2}>
         <Grid
-          onClick={() => col_row_change("path")}
+          onClick={() => setSearch({...search, title : "path"})}
           item
           xs={12}
           md={2.8}
@@ -554,7 +543,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => col_row_change("card")}
+          onClick={() => setSearch({...search, title : "card"})}
           item
           xs={12}
           md={2.8}
@@ -572,7 +561,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => col_row_change("enroll")}
+          onClick={() => setSearch({...search, title : "enroll"})}
           item
           xs={12}
           md={2.8}
@@ -590,7 +579,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => col_row_change("search")}
+          onClick={() => setSearch({...search, title : "search"})}
           item
           xs={12}
           md={2.8}
@@ -614,7 +603,16 @@ export default function UserTracking() {
 
       <Grid container scaping={2} className="overviewContainer">
         <Grid item p={2} xs={12} sx={{ boxShadow: 2, borderRadius: 5 }}>
+          
+        <div style={
+            {
+              display: 'flex',
+              justifyContent: 'space-between',
+            }
+          } >
           <Typography variant="h6"> {gridTitle}</Typography>
+          <Typography variant="h6"> {search.count}</Typography>
+          </div>
           <br></br>
           {DataGridView()}
         </Grid>

@@ -53,7 +53,7 @@ export const updateUser = async (data) => {
 // for listing the listCardTrack
 
 export const listCardTrack = async(data)=>{
-   return await axios.get(`${localBaseUrl}/listCardTrack?email=${data.email}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/listCardTrack?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -62,7 +62,7 @@ export const listCardTrack = async(data)=>{
 // for listing the listEnrollTrack
 
 export const listEnrollTrack = async(data)=>{
-   return await axios.get(`${localBaseUrl}/listEnrollTrack?email=${data.email}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/listEnrollTrack?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -71,7 +71,7 @@ export const listEnrollTrack = async(data)=>{
 // for listing the listSearchTrack
 
 export const listSearchTrack = async(data)=>{
-   return await axios.get(`${localBaseUrl}/listSearchTrack?email=${data.email}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/listSearchTrack?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -80,7 +80,7 @@ export const listSearchTrack = async(data)=>{
 // for listing the listTrackData
 
 export const listTrackData = async(data)=>{
-   return await axios.get(`${localBaseUrl}/listTrackData?email=${data.email}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/listTrackData?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  
@@ -89,7 +89,7 @@ export const listTrackData = async(data)=>{
 // for listing the searchUser
 
 export const searchUser = async(data)=>{
-   return await axios.get(`${localBaseUrl}/searchUser?email=${data.email}&table=${data.table}`,{headers: { 
+   return await axios.get(`${localBaseUrl}/searchUser?filter=${data}`,{headers: { 
          'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
       }})
  

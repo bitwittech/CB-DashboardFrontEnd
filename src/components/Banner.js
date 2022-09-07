@@ -45,7 +45,7 @@ export default function Banner() {
     const  res = addBanner(FD)
 
     res.then((data)=>{
-        console.log(data)
+        // console.log(data)
         dispatchAlert.setNote({
           open : true,
           variant : 'success',
@@ -54,7 +54,7 @@ export default function Banner() {
         })
       })
       .catch((err)=>{
-        console.log(err)
+        // console.log(err)
         dispatchAlert.setNote({
           open : true,
           variant : 'error',
@@ -75,7 +75,7 @@ export default function Banner() {
   useEffect(() => {
     listBanner()
       .then((data) => {
-        console.log(data)
+        // console.log(data)
 
         setRows(data.data.map((row) => {
           // setActive(row.banner_Status)
@@ -88,7 +88,7 @@ export default function Banner() {
         }))
       })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
       })
   }, []);
 
@@ -122,7 +122,7 @@ export default function Banner() {
   ];
 
   const handleSwitch = (e)=>{
-    console.log(e.target.name)
+    // console.log(e.target.name)
 
     const FD = new FormData()
 
@@ -132,7 +132,7 @@ export default function Banner() {
     const res = chaneStatus(FD);
 
     res.then((data)=>{
-      console.log(data)
+      // console.log(data)
       dispatchAlert.setNote({
         open : true,
         variant : 'success',
@@ -141,7 +141,7 @@ export default function Banner() {
       })
     })
     .catch((err)=>{
-      console.log(err)
+      // console.log(err)
       dispatchAlert.setNote({
         open : true,
         variant : 'error',
