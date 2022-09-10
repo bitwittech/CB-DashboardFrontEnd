@@ -74,3 +74,23 @@
     .chart {
         width: 500px;
     }
+    
+    .reportContainer {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 2%;
+        align-items: center;
+    }
+    
+    .stateContainer {
+        border-radius: 15px;
+        padding: 1% 0% 1% 0%;
+    }
+    
+    .states {
+        padding: 1% 0% 1% 0%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        /* text-align: center; */
+    }

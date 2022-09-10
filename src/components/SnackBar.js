@@ -13,7 +13,6 @@ export default function SnackBar() {
 
   return (
       <>
-      {console.log(dispatchAlert)}
           {dispatchAlert.Note.open === true  &&   
           <Snackbar open={dispatchAlert.Note.open} autoHideDuration={6000} onClose={()=>dispatchAlert.setNote({open: false, variant : null,massage : null})}>
                 <Alert onClose={()=>dispatchAlert.setNote({open: false, variant : null,massage : null })} severity = {dispatchAlert.Note.variant}  sx={{ width: '100%' }}>

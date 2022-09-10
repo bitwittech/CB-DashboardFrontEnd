@@ -131,3 +131,10 @@ export const siteReport = async ()=>{
       'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
    }})
 }
+
+export const miniReport = async (data)=>{
+   return await axios.get(`${localBaseUrl}/miniReport?filter=${data}`,{headers: { 
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${localStorage.getItem('WDToken')}`
+   }})
+}

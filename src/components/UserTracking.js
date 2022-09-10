@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  FormControl,
-  MenuItem,
+
+
   Typography,
   TextField,
   Backdrop,
-  InputLabel,
-  Select,
+
+
   Grid,
   LinearProgress,
   Button,
@@ -17,16 +17,13 @@ import {
 } from "@mui/material";
 import {
   ResponsiveContainer,
-  Cell,
   Legend,
   Tooltip,
-  PieChart,
-  Pie,
   LineChart,
-CartesianGrid,
-XAxis,
-YAxis,
-Line
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Line
 } from "recharts";
 import {
   DataGrid,
@@ -71,7 +68,7 @@ export default function UserTracking() {
     p: 4,
   };
 
-  const [search, setSearch] = useState({title : 'path',email : '',date : '', endDate : '', startDate : '', count : 0});
+  const [search, setSearch] = useState({ title: 'path', email: '', date: '', endDate: '', startDate: '', count: 0 });
   const [gridTitle, setgridTitle] = useState("Click Over The Track Cards");
 
   const [open, setOpen] = React.useState(false);
@@ -89,19 +86,19 @@ export default function UserTracking() {
 
   // date picker from third party 
   const DatePicker = props => {
-  
+
     const toggle = () => setOpenDateRange(!openDateRange);
-  
+
     return (
-      <Box sx = {{
+      <Box sx={{
         position: 'absolute'
       }}>
-      <DateRangePicker
-        open={openDateRange}
-        toggle={toggle}
-        // onChange={(range) => setDateRange(range)}
-        onChange={(range) => setSearch({...search,startDate : range.startDate,endDate : range.endDate})}
-      />
+        <DateRangePicker
+          open={openDateRange}
+          toggle={toggle}
+          // onChange={(range) => setDateRange(range)}
+          onChange={(range) => setSearch({ ...search, startDate: range.startDate, endDate: range.endDate })}
+        />
       </Box>
     );
   }
@@ -111,7 +108,7 @@ export default function UserTracking() {
 
     let DataArr = [];
 
-//  // console.log(JSON.stringify(data.row.page_time_span))
+    //  // console.log(JSON.stringify(data.row.page_time_span))
 
     JSON.parse(data.row.page_time_span).map((row) => {
       DataArr.push({ name: row.path, value: row.time });
@@ -124,18 +121,18 @@ export default function UserTracking() {
 
   let date = '';
 
-  useEffect(()=>{
+  useEffect(() => {
 
     col_row_change(search)
 
-  },[search.title,search.emdDate,search.startDate])
+  }, [search.title, search.emdDate, search.startDate])
 
 
   const col_row_change = (e) => {
     // // console.log(search);
     setgridTitle("Loading...");
 
-     localStorage.setItem('model',e);
+    localStorage.setItem('model', e);
 
     switch (e.title) {
       case "path":
@@ -165,14 +162,14 @@ export default function UserTracking() {
         listTrackData(JSON.stringify(search))
           .then((data) => {
             // // console.log(data);
-            setSearch({...search, count : data.data.length})
+            setSearch({ ...search, count: data.data.length })
             setRows(
               data.data.map((row) => {
                 setgridTitle("User Path");
                 // // console.log(row.time_stamp)
-                 date = JSON.stringify(row.time_stamp)
-          .split("T")[0]
-          .slice(1)
+                date = JSON.stringify(row.time_stamp)
+                  .split("T")[0]
+                  .slice(1)
 
                 return {
                   id: row._id,
@@ -215,14 +212,14 @@ export default function UserTracking() {
 
         listSearchTrack(JSON.stringify(search))
           .then((data) => {
-            setSearch({...search, count : data.data.length});
+            setSearch({ ...search, count: data.data.length });
 
             setRows(
               data.data.map((row) => {
                 setgridTitle("Search Track");
                 date = JSON.stringify(row.event_time)
-                .split("T")[0]
-                .slice(1)
+                  .split("T")[0]
+                  .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
@@ -275,14 +272,14 @@ export default function UserTracking() {
         listCardTrack(JSON.stringify(search))
           .then((data) => {
             // // console.log(data);
-        setSearch({...search, count : data.data.length});
+            setSearch({ ...search, count: data.data.length });
 
             setRows(
               data.data.map((row) => {
                 setgridTitle("Card Track");
                 date = JSON.stringify(row.event_time)
-                .split("T")[0]
-                .slice(1)
+                  .split("T")[0]
+                  .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
@@ -337,18 +334,18 @@ export default function UserTracking() {
         listEnrollTrack(JSON.stringify(search))
           .then((data) => {
             // // console.log(data);
-        setSearch({...search, count : data.data.length});
+            setSearch({ ...search, count: data.data.length });
 
             setRows(
               data.data.map((row) => {
                 setgridTitle("Enroll Track");
                 date = JSON.stringify(row.event_time)
-                .split("T")[0]
-                .slice(1)
+                  .split("T")[0]
+                  .slice(1)
                 return {
                   id: row._id,
                   user_email: row.user_email,
-                  event_time: date ,
+                  event_time: date,
                   card_title: row.card_title,
                   card_uuid: row.card_uuid,
                   provider: row.provider,
@@ -391,7 +388,7 @@ export default function UserTracking() {
   const handelSearch = (e) => {
     setSearch({
       ...search,
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -461,27 +458,27 @@ export default function UserTracking() {
         }}
       >
 
-<Grid xs={12} md={3.5}>
+        <Grid xs={12} md={3.5}>
           <Button
             sx={{ width: "100%" }}
             color="primary"
             startIcon={<CalendarMonthIcon />}
             variant="contained"
-            onClick = {()=>{setOpenDateRange(true)}}
+            onClick={() => { setOpenDateRange(true) }}
           >
             Date Filter
           </Button>
-          <DatePicker/>
-        </Grid> 
-      
+          <DatePicker />
+        </Grid>
 
-        <Grid xs={12} md = {4}>
+
+        <Grid xs={12} md={4}>
           <TextField
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
             label="User Email"
-            onChange={(e)=> setSearch({...search, email : e.target.value })}
+            onChange={(e) => setSearch({ ...search, email: e.target.value })}
             name="email"
             InputProps={{
               startAdornment: (
@@ -498,22 +495,22 @@ export default function UserTracking() {
             fullWidth
             autoComplete={false}
             id="demo-helper-text-aligned-no-helper"
-            name = 'number'
+            name='number'
             type="number"
             label="Search By Mobile"
-            onChange={(e)=> setSearch({...search, mobile : e.target.value})}
+            onChange={(e) => setSearch({ ...search, mobile: e.target.value })}
 
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">Mobile Number</InputAdornment>
-            //   ),
-            // }}
+          // InputProps={{
+          //   startAdornment: (
+          //     <InputAdornment position="start">Mobile Number</InputAdornment>
+          //   ),
+          // }}
           />
         </Grid>
 
 
 
-        
+
       </Grid>
 
 
@@ -525,7 +522,7 @@ export default function UserTracking() {
 
       <Grid container className="overviewContainer" spacing={1.2}>
         <Grid
-          onClick={() => setSearch({...search, title : "path"})}
+          onClick={() => setSearch({ ...search, title: "path" })}
           item
           xs={12}
           md={2.8}
@@ -543,7 +540,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => setSearch({...search, title : "card"})}
+          onClick={() => setSearch({ ...search, title: "card" })}
           item
           xs={12}
           md={2.8}
@@ -561,7 +558,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => setSearch({...search, title : "enroll"})}
+          onClick={() => setSearch({ ...search, title: "enroll" })}
           item
           xs={12}
           md={2.8}
@@ -579,7 +576,7 @@ export default function UserTracking() {
         </Grid>
 
         <Grid
-          onClick={() => setSearch({...search, title : "search"})}
+          onClick={() => setSearch({ ...search, title: "search" })}
           item
           xs={12}
           md={2.8}
@@ -603,15 +600,15 @@ export default function UserTracking() {
 
       <Grid container scaping={2} className="overviewContainer">
         <Grid item p={2} xs={12} sx={{ boxShadow: 2, borderRadius: 5 }}>
-          
-        <div style={
+
+          <div style={
             {
               display: 'flex',
               justifyContent: 'space-between',
             }
           } >
-          <Typography variant="h6"> {gridTitle}</Typography>
-          <Typography variant="h6"> {search.count}</Typography>
+            <Typography variant="h6"> {gridTitle}</Typography>
+            <Typography variant="h6"> {search.count}</Typography>
           </div>
           <br></br>
           {DataGridView()}
@@ -631,7 +628,7 @@ export default function UserTracking() {
           timeout: 500,
         }}
       >
-                                    
+
         <Fade in={open}>
           <Box sx={style}>
             {/* char view  */}
@@ -641,33 +638,17 @@ export default function UserTracking() {
                 <Typography variant="h6"> User Path </Typography>
                 <br></br>
                 <ResponsiveContainer width="95%" height="85%">
-                  
-                <LineChart width={730} height={250} data={Data}
-                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name"  />
-                  <YAxis  dataKey = 'value' />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                </LineChart>
-                  {/* <PieChart className="chart">
+
+                  <LineChart width={730} height={250} data={Data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis dataKey='value' />
                     <Tooltip />
                     <Legend />
-                    <Pie
-                      data={Data}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#8884d8"
-                    >
-                      {Data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={colors[index]} />
-                      ))}
-                    </Pie>
-                  </PieChart> */}
+                    <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                  </LineChart>
+
                 </ResponsiveContainer>
               </Grid>
             </Grid>
